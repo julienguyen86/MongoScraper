@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="jumbotron text-center">
+  </div>
+</div>
+
+{{#unless articles}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="empty-articles text-center">
+      <h1>No Current Articles</h1>
+    </div>
+  </div>
+</div>
+{{/unless}}
+
+{{#if articles}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      {{#each articles}}
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-md-10">
+                <h3><a href="{{this.link}}" class="headline">{{this.title}}</a></h3>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-success save-button" data-id="{{this._id}}">SAVE ARTICLE</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            {{#if this.summary}}
+              <p>{{this.summary}}</p>
+            {{/if}}
+            {{#unless this.summary}}
+              <p>No Summary Avaliable</p>
+            {{/unless}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+{{/if}}
+
+{{#each articles}}
+<div id="modal_{{this._id}}" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="modalClose close" data-id="{{this._id}}"><span class="close">&times;</span></button>
+        <h4 class="modal-title blackText" id="sentModalLabel">{{this.title}}</h4>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
