@@ -1,7 +1,7 @@
 #MongoScraper
 
 
-###Overview
+##Overview
 This applicastion is designed to create a web app that lets users view and leave notes on the latest news. The users can save articles, and can also add notes to their saved articles if they choose.
 
 ### To Run:
