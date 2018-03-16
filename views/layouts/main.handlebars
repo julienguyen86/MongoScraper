@@ -15,14 +15,14 @@
 
 		<script src="app.js"></script>
 
-		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<link rel="stylesheet" href="style.css"/>
 
 	</head>
-	<body class="body">
+	<body>
 
 	<nav class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- Nav bar -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -32,19 +32,17 @@
       </button>
       <a class="navbar-brand brand" href="/">Mongo News Scraper</a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="/">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="/savedarticles">Saved Articles</a></li>
       </ul>
 	<ul class="nav navbar-nav navbar-right">
-		  <li><a href="/scrape"><button class="btn btn-danger">Scrape Articles</button></a></li>
+		<li><a href="/scrape"><button class="btn btn-danger">Scrape Articles</button></a></li>
       </ul>
 
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 
 		{{{ body }}}

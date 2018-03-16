@@ -1,8 +1,14 @@
 {
-  "name": "mongo-news-scraper-master",
+  "name": "MongoScraper",
   "version": "1.0.0",
   "description": "The New York Times Article Saver application featured on this page is built in two different versions: a Mongo Database Scraper and a React Application.  Both sites accomplish the goal of finding articles from the New York Times and give users the ability to save articles to a mongo database.  Zachary Saltzman was responsible for all aspects of these applications.",
   "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Julie Nguyen",
+  "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
@@ -11,12 +17,5 @@
     "express-handlebars": "^3.0.0",
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "Julie Nguyen",
-  "license": "ISC"
+  }
 }

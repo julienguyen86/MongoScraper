@@ -1,7 +1,3 @@
-body {
-	background-image: url("public/images/circles-light.png")
-}
-
 .headline:link    {
   /* Applies to all unvisited links */
   text-decoration:  none;
@@ -81,8 +77,4 @@ body {
 .close {
 	color: white;
 	opacity: 1;
-}
-
-.btn {
-	margin-right: 100px;
 }

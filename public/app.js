@@ -13,11 +13,11 @@ $(document).on("click", ".note-button", showModal);
 
 $(document).on("click", "#savenote", function() {
   // Grab the id associated with the article from the submit button
-  // console.log("click firing");
+  console.log("click firing");
   var thisId = $(this).attr("data-id");
-  // console.log("pre-note-body");
+  console.log("pre-note-body");
   var noteBody = $("#bodyinput-"+$(this).attr("data-id")).val();
-  // console.log(noteBody);
+  console.log(noteBody);
 
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({

@@ -1,20 +1,14 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
-var mongoose = require("mongoose");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
+var mongoose = require("mongoose"); 
 var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
 var db = require("./models");
 
-var PORT = process.env.PORT || 3000;
-
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScraper";
+var PORT = 3000;
 
 // Initialize Express
 var app = express();
@@ -35,7 +29,7 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
+mongoose.connect("mongodb://localhost/mongoNewsScraper", {
   useMongoClient: true
 });
 
@@ -91,7 +85,7 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
+app.get("/", function(req, res) {
   // TODO: Finish the route so it grabs all of the articles
     db.Article.find({}).populate("notes").then(function(data) {
       res.render("index", {articles: data});
@@ -102,12 +96,10 @@ app.get("/articles", function(req, res) {
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
-  // TODO
-  // ====
-  // Finish the route so it finds one article using the req.params.id,
-  // and run the populate method with "note",
-  // then responds with the article with the note included
-  db.Article.findById(req.params.id).populate("notes").then (function (data) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Article.findById(req.params.id)
+  .populate("notes")
+  .then (function (data) {
     res.json(data);
   }).catch(function (err) {
     res.json(err);
@@ -117,12 +109,9 @@ app.get("/articles/:id", function(req, res) {
 
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function(req, res) {
-  // TODO
-  // ====
-  // save the new note that gets posted to the Notes collection
-  // then find an article from the req.params.id
-  // and update it's "note" property with the _id of the new note
-  db.Note.create(req.body).then(function(dbNote) {
+// Create a new note and pass the req.body to the entry
+  db.Note.create(req.body)
+    .then(function(dbNote) {
     return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {notes: dbNote}}).then(function(dbRes) {
       res.redirect("/");
     });
