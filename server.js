@@ -8,7 +8,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+// var PORT = 3000;
 
 // Initialize Express
 var app = express();
@@ -29,7 +29,7 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/mongoNewsScraper", {
+mongoose.connect("mongodb://heroku_rj2v6r9v:4hsurcn9bjcmnapa69g77a2rl0@ds215089.mlab.com:15089/heroku_rj2v6r9v", {
   useMongoClient: true
 });
 
@@ -147,6 +147,7 @@ app.get("/savedarticles", function(req, res) {
 });
 
 // Start the server
+var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
 });
