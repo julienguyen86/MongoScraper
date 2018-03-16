@@ -9,15 +9,19 @@ This applicastion is designed to create a web app that lets users view and leave
 
 ## Demo
 * Scrape Articles
+
 ![Giphy](public/images/scraper.gif)
 
 * Save Articles
+
 ![Giphy](public/images/savearticle.gif)
 
 * Add Notes
+
 ![Giphy](public/images/notes.gif)
 
 * Remove Saved Articles
+
 ![Giphy](public/images/remove.gif)
 
 
