@@ -1,14 +1,14 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
-var mongoose = require("mongoose"); 
+var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
 var db = require("./models");
 
-// var PORT = 3000;
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoNewsScraper";
 
 // Initialize Express
 var app = express();
@@ -27,9 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(" mongodb://heroku_w4n8rt4q:94gcdqlukv838va1nlfjj55gsc@ds215709.mlab.com:15709/heroku_w4n8rt4q", {
+mongoose.connect("mongodb://heroku_w4n8rt4q:94gcdqlukv838va1nlfjj55gsc@ds215709.mlab.com:15709/heroku_w4n8rt4q", {
   useMongoClient: true
 });
 
@@ -96,10 +95,7 @@ app.get("/", function(req, res) {
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
-  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  db.Article.findById(req.params.id)
-  .populate("notes")
-  .then (function (data) {
+  db.Article.findById(req.params.id).populate("notes").then (function (data) {
     res.json(data);
   }).catch(function (err) {
     res.json(err);
@@ -109,9 +105,7 @@ app.get("/articles/:id", function(req, res) {
 
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function(req, res) {
-// Create a new note and pass the req.body to the entry
-  db.Note.create(req.body)
-    .then(function(dbNote) {
+  db.Note.create(req.body).then(function(dbNote) {
     return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {notes: dbNote}}).then(function(dbRes) {
       res.redirect("/");
     });
@@ -138,7 +132,7 @@ app.post("/articles/unsave/:id", function (req, res) {
 })
 
 app.get("/savedarticles", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
+   // Finish the route so it grabs all of the articles
     db.Article.find({saved: true}).populate("notes").then(function(data) {
       res.render("saved", {articles: data});
     }).catch(function (err) {
@@ -146,7 +140,7 @@ app.get("/savedarticles", function(req, res) {
     });
 });
 
-// Start the server
+
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
